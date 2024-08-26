@@ -1,0 +1,8 @@
+[package]
+name = "bevy_advanced_despawn"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy_ecs = "0.14"
+bevy_time = "0.14"
