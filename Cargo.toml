@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 bevy_ecs = "0.14"
 bevy_time = "0.14"
-bevy = "0.14.0"
+bevy_app = "0.14"
+bevy_internal = "0.14"
