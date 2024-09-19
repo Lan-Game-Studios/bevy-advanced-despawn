@@ -3,14 +3,11 @@ use std::marker::PhantomData;
 use bevy_ecs::{entity::Entity, event::Event, prelude::Component};
 use bevy_time::prelude::Timer;
 
-
 #[derive(Component)]
 pub struct DespawnScheduleFirst;
 
-
 #[derive(Component)]
 pub struct DespawnSchedulePreUpdate;
-
 
 #[derive(Component)]
 pub struct DespawnScheduleStateTransition;
@@ -24,7 +21,6 @@ pub struct DespawnScheduleRunFixedMainLoop;
 /// TODO make example
 #[derive(Component)]
 pub struct DespawnScheduleUpdate;
-
 
 #[derive(Component)]
 pub struct DespawnSchedulePostUpdate;
@@ -51,18 +47,17 @@ impl From<Timer> for DespawnAfterTimer {
 #[derive(Component)]
 pub struct DespawnAfterFrames(pub usize);
 
-
 /// despawn the entity when another entity gets removed
 /// TODO make the system to process this
 /// TODO make test
 /// TODO make example
-pub struct DespawnWith(Entity);
+pub struct DespawnWith(pub Entity);
 
 /// despawn the entity when an event E is written
 /// TODO make the system to process this
 /// TODO make test
 /// TODO make example
-pub struct DespawnWithEvent<E: Event>(Entity, PhantomData<E>);
+pub struct DespawnWithEvent<E: Event>(pub Entity, PhantomData<E>);
 
 /// TODO check if this is usefull in example
 impl<E: Event> From<Entity> for DespawnWithEvent<E> {
@@ -89,8 +84,6 @@ impl<E: Event + Into<Entity>> From<E> for DespawnByEvent<E> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
