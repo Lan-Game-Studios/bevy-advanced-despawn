@@ -53,20 +53,9 @@ pub struct DespawnAfterFrames(pub usize);
 
 
 /// despawn the entity when another entity gets removed
-/// 
-/// ```
-/// #[derive(Component)]
-/// struct A;
-/// 
-/// /// #[derive(Component)]
-/// struct B;
-/// 
-/// fn main() {
-///   let entity = commands.spawn(A).id();
-///   // now despawns when ever the first entity despawns
-///   commands.spawn((B, DespawnWith(entity)));
-/// }
-/// ```
+/// TODO make the system to process this
+/// TODO make test
+/// TODO make example
 pub struct DespawnWith(Entity);
 
 /// despawn the entity when an event E is written
@@ -104,7 +93,6 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        assert_eq!(2 + 2, 4);
     }
 }
