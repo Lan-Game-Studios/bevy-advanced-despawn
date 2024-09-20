@@ -37,7 +37,6 @@ pub struct DespawnSchedulePostUpdate;
 #[derive(Component)]
 pub struct DespawnScheduleLast;
 
-
 /// despawn after x frames
 /// TODO make the system to process this
 /// TODO make test
