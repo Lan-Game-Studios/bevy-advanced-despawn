@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Doc](https://docs.rs/bevy-advanced-despawn/badge.svg)](https://docs.rs/bevy-advanced-despawn)
 [![Crate](https://img.shields.io/crates/v/bevy-advanced-despawn.svg)](https://crates.io/crates/bevy-advanced-despawn)
-[![Build Status](https://github.com/tecbeast42/bevy-advanced-despawn/actions/workflows/rust.yml/badge.svg)](https://github.com/tecbeast42/bevy-advanced-despawn/actions/workflows/rust.yml)
+[![Build Status](https://github.com/Lan-Game-Studios/bevy-advanced-despawn/actions/workflows/rust.yml/badge.svg)](https://github.com/Lan-Game-Studios/bevy-advanced-despawn/actions/workflows/rust.yml)
 [![Bevy tracking](https://img.shields.io/badge/Bevy%20tracking-v0.14-lightblue)](https://github.com/bevyengine/bevy/blob/main/docs/plugins_guidelines.md#main-branch-tracking)
 
 Despawn Entites with a simple component in a delayed fashion.
