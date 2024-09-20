@@ -78,12 +78,4 @@ impl<E: Event + Into<Entity>> From<E> for DespawnByEvent<E> {
     }
 }
 
-/// TODO make examples combine some of them
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+// TODO make examples combine some of them
