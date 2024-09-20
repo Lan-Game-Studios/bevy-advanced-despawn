@@ -1,9 +1,9 @@
-mod prelude;
 pub mod despawn_after_timer;
+mod prelude;
 
-use std::marker::PhantomData;
 use bevy_app::{App, Plugin, Update};
 use bevy_ecs::{entity::Entity, event::Event, prelude::Component};
+use std::marker::PhantomData;
 
 pub struct TimerPlugin;
 impl Plugin for TimerPlugin {
