@@ -1,5 +1,16 @@
+mod prelude;
+pub mod despawn_after_timer;
+
 use std::marker::PhantomData;
+use bevy_app::{App, Plugin, Update};
 use bevy_ecs::{entity::Entity, event::Event, prelude::Component};
+
+pub struct TimerPlugin;
+impl Plugin for TimerPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_systems(Update, despawn_after_timer::despawn_after_timer);
+    }
+}
 
 #[derive(Component)]
 pub struct DespawnScheduleFirst;
@@ -26,48 +37,6 @@ pub struct DespawnSchedulePostUpdate;
 #[derive(Component)]
 pub struct DespawnScheduleLast;
 
-
-pub mod DespawnAfterTimer {
-    use bevy_ecs::{entity::Entity, prelude::Component, system::{Commands, Query, Res}};
-    use bevy_time::prelude::{Timer, Time};
-
-    /// despawn when the timer runs out
-    /// ```
-    /// use bevy_ecs::{prelude::Component, prelude::Commands};
-    /// use bevy_time::{Timer, TimerMode};
-    /// use bevy_advanced_despawn::DespawnAfterTimer;
-    /// 
-    /// #[derive(Component)]
-    /// struct A;
-    /// 
-    /// fn setup(mut commands: Commands) {
-    ///   let timer = Timer::from_seconds(1.0, TimerMode::Once);
-    ///   commands.spawn((A, DespawnAfterTimer::DespawnAfterTimer(timer)));
-    /// }
-    /// ```
-    #[derive(Component)]
-    pub struct DespawnAfterTimer(pub Timer);
-
-    impl From<Timer> for DespawnAfterTimer {
-        fn from(value: Timer) -> Self {
-            Self(value)
-        }
-    }
-
-    pub fn despawn_after_timer(
-        time: Res<Time>,
-        mut commands: Commands,
-        mut entity_query: Query<(Entity, &mut DespawnAfterTimer)>,
-    ) {
-        for (entity, mut timer) in entity_query.iter_mut() {
-            timer.0.tick(time.delta());
-            println!("{:?}", timer.0.elapsed_secs());
-            if timer.0.finished() {
-                commands.entity(entity).despawn();
-            }
-        }
-    }
-}
 
 /// despawn after x frames
 /// TODO make the system to process this
@@ -113,37 +82,8 @@ impl<E: Event + Into<Entity>> From<E> for DespawnByEvent<E> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use bevy_time::{Real, Time, TimePlugin, Timer, TimerMode};
-    use bevy_app::{App, Update};
-    use std::time::Duration;
-
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
-    }
-
-    #[test]
-    fn test_despawn_after_timer() {
-        #[derive(Component)]
-        struct A;
-
-        // Create a new Bevy app
-        let mut app = App::new();
-        
-        app.add_plugins(TimePlugin)
-            .add_systems(Update, DespawnAfterTimer::despawn_after_timer);
-
-        let entity = app.world_mut().spawn((
-            A,
-            DespawnAfterTimer::DespawnAfterTimer(Timer::from_seconds(0.1, TimerMode::Once)),
-        )).id();
-        app.update();
-
-        let mut time = *app.world().resource::<Time<Real>>();
-        time.update_with_duration(Duration::from_secs_f32(2.1));
-        app.update();
-
-        assert!(app.world().get_entity(entity).is_none());
     }
 }
