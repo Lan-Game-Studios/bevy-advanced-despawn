@@ -1,15 +1,17 @@
 pub mod despawn_after_timer;
+pub mod despawn_recursive;
 pub mod despawn_with_event;
 pub mod prelude;
 
-use bevy_app::{App, Plugin, Update};
+use bevy_app::{App, Last, Plugin, Update};
 use bevy_ecs::{entity::Entity, event::Event, prelude::Component};
 use std::marker::PhantomData;
 
-pub struct TimerPlugin;
-impl Plugin for TimerPlugin {
+pub struct DespawnPlugin;
+impl Plugin for DespawnPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, despawn_after_timer::despawn_after_timer);
+        app.add_systems(Update, despawn_after_timer::despawn_after_timer)
+            .add_systems(Last, despawn_recursive::despawn_marked_entities);
     }
 }
 
