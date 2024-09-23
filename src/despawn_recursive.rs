@@ -6,6 +6,7 @@ use bevy_ecs::{
 };
 use bevy_hierarchy::DespawnRecursiveExt;
 
+/// despawn the entity recursively
 /// ```
 /// use bevy_ecs::{prelude::Component, prelude::Commands};
 /// use bevy_time::{Timer, TimerMode};
