@@ -5,8 +5,8 @@ use bevy_ecs::{
     query::With,
     system::{Commands, Query},
 };
-use std::marker::PhantomData;
 use bevy_hierarchy::DespawnRecursiveExt;
+use std::marker::PhantomData;
 
 /// despawn the entity when an event E is written
 /// ```
